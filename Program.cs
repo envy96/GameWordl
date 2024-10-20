@@ -3,16 +3,19 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 
 class Program
 {
+    static string LOGIN, PASSWORD;
     static void Main(string[] args)
     {
-        string LOGIN, PASSWORD;
+        
         string filePath = "История.txt";
         Console.WriteLine("Игра с угадыванием числа\n" +
             "Выберите пункт меню:\n" +
-            "1)Начать игру\n" +
-            "2)Вывести лучший результат\n" +
-            "3)Последний матч\n" +
-            "4)Выход");
+            "1)Авторизация\n" +
+            "2)Регистрация\n" +
+            "3)Игра\n" +
+            "4)Вывести лучший результат\n" +
+            "5)Последний матч\n" +
+            "6)Выход");
         Console.Write(">");
         string command = Console.ReadLine();
         while (command != "4")
@@ -21,12 +24,18 @@ class Program
             switch (command)
             {
                 case "1":
-                    registration(filePath);
+                    auth(filePath);
                     break;
                 case "2":
-                    BestRes(filePath);
+                    registration(filePath);
                     break;
                 case "3":
+                    GameWordle();
+                    break;
+                case "4":
+                    BestRes(filePath);
+                    break;
+                case "5":
                     LastGame(filePath);
                     break;
                 default:
@@ -71,9 +80,33 @@ class Program
             }
     }
     static void auth(string filePath){
-
-        string login;
-        string password;
+        string[] users, user, userLogPass;
+        string log, pass;
+        bool existUser = false;
+        int lineCount = 0;
+        
+        if(File.Exists(filePath)){
+                lineCount = File.ReadAllLines(filePath).Length;
+                users = File.ReadAllLines(filePath);
+                Console.Write("Логин:");
+                log = Console.ReadLine();
+                Console.Write("Пароль:");
+                pass = Console.ReadLine();
+                for(int i = 0; i < lineCount; i++){
+                    user = users[i].Split('~');
+                    userLogPass = user[0].Split('|');
+                    if(log == userLogPass[0]){
+                        existUser = true;
+                    }
+                }
+                if(existUser){
+                    Console.WriteLine("Пользователь Найден");
+                    LOGIN = log;
+                    PASSWORD = pass;
+                }else{
+                    Console.WriteLine("Пользователя с таким логином не существует");
+                }
+        }
     }
     static void LastGame(string filePath)
     {
@@ -145,12 +178,19 @@ class Program
     {
         try
         {
-            string[] history;
+            string[] history, user, userLogPass;
             int lineCount = 0;
             if (File.Exists(filePath))
             {
                 lineCount = File.ReadAllLines(filePath).Length;
                 history = File.ReadAllLines(filePath);
+                for(int i = 0; i < lineCount; i++){
+                    user = history[i].Split("~");
+                    userLogPass = user[0].Split("|");
+                    if(LOGIN == userLogPass[0]){
+                        
+                    }
+                }
                 int Lastgame = Convert.ToInt32(history[lineCount-1].Split(':')[0]);
                 string text = $"{Lastgame+1}:{number}:{botNumber}\n";
                 File.AppendAllText(filePath, text);
