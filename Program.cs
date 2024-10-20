@@ -63,8 +63,9 @@ class Program
                 if(existUser){
                     Console.WriteLine("Пользователь с таким логином существует!");
                 }else{
-                    string text = $"{log}|{pass}~";
+                    string text = $"\n{log}|{pass}~";
                     File.AppendAllText(filePath, text);
+                    Console.WriteLine("Пользователь добавллен");
                 }
                 
             }
