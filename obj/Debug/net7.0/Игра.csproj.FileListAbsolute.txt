@@ -1,0 +1,15 @@
+C:\Users\Данил\OneDrive\Desktop\Игра\Игра\obj\Debug\net7.0\Игра.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Данил\OneDrive\Desktop\Игра\Игра\obj\Debug\net7.0\Игра.AssemblyInfoInputs.cache
+C:\Users\Данил\OneDrive\Desktop\Игра\Игра\obj\Debug\net7.0\Игра.AssemblyInfo.cs
+C:\Users\Данил\OneDrive\Desktop\Игра\Игра\obj\Debug\net7.0\Игра.csproj.CoreCompileInputs.cache
+C:\Users\Данил\OneDrive\Desktop\Игра\Игра\bin\Debug\net7.0\Игра.exe
+C:\Users\Данил\OneDrive\Desktop\Игра\Игра\bin\Debug\net7.0\Игра.deps.json
+C:\Users\Данил\OneDrive\Desktop\Игра\Игра\bin\Debug\net7.0\Игра.runtimeconfig.json
+C:\Users\Данил\OneDrive\Desktop\Игра\Игра\bin\Debug\net7.0\Игра.dll
+C:\Users\Данил\OneDrive\Desktop\Игра\Игра\bin\Debug\net7.0\Игра.pdb
+C:\Users\Данил\OneDrive\Desktop\Игра\Игра\obj\Debug\net7.0\Игра.dll
+C:\Users\Данил\OneDrive\Desktop\Игра\Игра\obj\Debug\net7.0\refint\Игра.dll
+C:\Users\Данил\OneDrive\Desktop\Игра\Игра\obj\Debug\net7.0\Игра.pdb
+C:\Users\Данил\OneDrive\Desktop\Игра\Игра\obj\Debug\net7.0\Игра.genruntimeconfig.cache
+C:\Users\Данил\OneDrive\Desktop\Игра\Игра\obj\Debug\net7.0\ref\Игра.dll
+C:\Users\Данил\OneDrive\Desktop\Игра\Игра\obj\Debug\net7.0\Игра.csproj.AssemblyReference.cache
