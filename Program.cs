@@ -5,12 +5,12 @@ class Program
 {
     static void Main(string[] args)
     {
+        string LOGIN, PASSWORD;
         string filePath = "История.txt";
         Console.WriteLine("Игра с угадыванием числа\n" +
             "Выберите пункт меню:\n" +
             "1)Начать игру\n" +
             "2)Вывести лучший результат\n" +
-
             "3)Последний матч\n" +
             "4)Выход");
         Console.Write(">");
@@ -21,7 +21,7 @@ class Program
             switch (command)
             {
                 case "1":
-                    GameWordle();
+                    registration(filePath);
                     break;
                 case "2":
                     BestRes(filePath);
@@ -38,6 +38,41 @@ class Program
         }
         
         
+    }
+    static void registration(string filePath){
+        
+        string[] users, user, userLogPass;
+        string log, pass;
+        bool existUser = false;
+        int lineCount = 0;
+        if (File.Exists(filePath))
+            {
+                lineCount = File.ReadAllLines(filePath).Length;
+                users = File.ReadAllLines(filePath);
+                Console.Write("Логин:");
+                log = Console.ReadLine();
+                Console.Write("Пароль:");
+                pass = Console.ReadLine();
+                for(int i = 0; i < lineCount; i++){
+                    user = users[i].Split('~');
+                    userLogPass = user[0].Split('|');
+                    if(log == userLogPass[0]){
+                        existUser = true;
+                    }
+                }
+                if(existUser){
+                    Console.WriteLine("Пользователь с таким логином существует!");
+                }else{
+                    string text = $"{log}|{pass}~";
+                    File.AppendAllText(filePath, text);
+                }
+                
+            }
+    }
+    static void auth(string filePath){
+
+        string login;
+        string password;
     }
     static void LastGame(string filePath)
     {

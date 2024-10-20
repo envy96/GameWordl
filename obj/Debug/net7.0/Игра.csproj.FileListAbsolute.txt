@@ -12,4 +12,3 @@ C:\Users\Данил\OneDrive\Desktop\Игра\Игра\obj\Debug\net7.0\refint\�
 C:\Users\Данил\OneDrive\Desktop\Игра\Игра\obj\Debug\net7.0\Игра.pdb
 C:\Users\Данил\OneDrive\Desktop\Игра\Игра\obj\Debug\net7.0\Игра.genruntimeconfig.cache
 C:\Users\Данил\OneDrive\Desktop\Игра\Игра\obj\Debug\net7.0\ref\Игра.dll
-C:\Users\Данил\OneDrive\Desktop\Игра\Игра\obj\Debug\net7.0\Игра.csproj.AssemblyReference.cache
