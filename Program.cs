@@ -18,7 +18,7 @@ class Program
             "6)Выход");
         Console.Write(">");
         string command = Console.ReadLine();
-        while (command != "4")
+        while (command != "6")
         {
             
             switch (command)
@@ -108,6 +108,23 @@ class Program
                 }
         }
     }
+    static string findUser(string filePath){
+        string[] users, user, userLogPass;
+        
+        
+        int lineCount = 0;
+        lineCount = File.ReadAllLines(filePath).Length;
+        users = File.ReadAllLines(filePath); 
+        for(int i = 0; i < lineCount; i++){
+            user = users[i].Split('~');
+            userLogPass = user[0].Split('|');
+            if(LOGIN == userLogPass[0]){
+                return user[1];
+            }
+        }  
+
+        return "";
+    }
     static void LastGame(string filePath)
     {
         try
@@ -117,10 +134,10 @@ class Program
             int lineCount = 0;
             if (File.Exists(filePath))
             {
-                lineCount = File.ReadAllLines(filePath).Length;
-                history = File.ReadAllLines(filePath);
-                string[] game = history[lineCount-1].Split(':');
-                text = $"Последняя игра - угадывали число {game[2]}, число попыток угадать число - {game[1]}\n";
+                
+                string[] Games = findUser(filePath).Split('/');
+                string[] lastGame = Games[Games.Length - 1].Split(':');
+                text = $"Последняя игра - угадывали число {lastGame[2]}, число попыток угадать число - {lastGame[1]}\n";
                 Console.WriteLine(text);
             }
 
@@ -134,22 +151,22 @@ class Program
     {
         try
         {
-            int lineCount = 0;
-            string[] history;
+            string[] history, users, user;
             int minHod = 100000;
             string text = "";
             if (File.Exists(filePath))
             {
 
-                lineCount = File.ReadAllLines(filePath).Length;
-                history = File.ReadAllLines(filePath);
+                
+                users = File.ReadAllLines(filePath);
 
-                for (int i = 0; i < lineCount; i++)
+                history = findUser(filePath).Split('/');
+                for (int i = 0; i < history.Length; i++)
                 {
                     string[] game = history[i].Split(':');
                     minHod = Math.Min(minHod, Convert.ToInt32(game[1]));
                 }
-                for (int i = 0; i < lineCount; i++)
+                for (int i = 0; i < history.Length; i++)
                 {
                     string[] game = history[i].Split(':');
                     if (Convert.ToInt32(game[1]) == minHod)
