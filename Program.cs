@@ -179,6 +179,7 @@ class Program
         try
         {
             string[] history, user, userLogPass;
+            string newText;
             int lineCount = 0;
             if (File.Exists(filePath))
             {
@@ -186,14 +187,33 @@ class Program
                 history = File.ReadAllLines(filePath);
                 for(int i = 0; i < lineCount; i++){
                     user = history[i].Split("~");
+                    
                     userLogPass = user[0].Split("|");
-                    if(LOGIN == userLogPass[0]){
+                    if(LOGIN == userLogPass[0] && user[1] != ""){
                         
+                        string oldtext = history[i];
+                        Console.WriteLine('1');
+                        string[] Games = user[1].Split('/');
+                        string[] LastGame = Games[Games.Length-1].Split(':');
+                        int lastNumGame = Convert.ToInt32(LastGame[0]);
+                        newText = history[i] + $"/{lastNumGame+1}:{number}:{botNumber}";
+                        history[i] = history[i].Replace(oldtext, newText);
+
+                        File.WriteAllLines(filePath, history);
+                    }
+                    else if(LOGIN == userLogPass[0] && user[1] == ""){
+                        Console.WriteLine("2"); 
+                        string oldtext = history[i];
+                        int lastNumGame = 0;
+                        newText = history[i] + $"{lastNumGame+1}:{number}:{botNumber}";
+                        history[i] = history[i].Replace(oldtext, newText);
+
+                        File.WriteAllLines(filePath, history);
                     }
                 }
-                int Lastgame = Convert.ToInt32(history[lineCount-1].Split(':')[0]);
-                string text = $"{Lastgame+1}:{number}:{botNumber}\n";
-                File.AppendAllText(filePath, text);
+                
+                
+                
             }
             
         }
