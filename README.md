@@ -1,5 +1,5 @@
 <h1 align="center">Hi there, I'm Danila
-<img src="https://github.com/blackcater/blackcater/raw/main/images/Hi.gif" height="32"/></h1>
+<img src="https://i.pinimg.com/originals/12/ce/65/12ce65bc6c2b201d68c29822ecbd186c.gif" height="32"/></h1>
 <h3 align="center">Sudent DVGUPS</h3>
 
 This is my Game Wordle on C#
