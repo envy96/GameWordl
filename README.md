@@ -6,6 +6,7 @@ This is my Game Wordle on C#
 
 
 Метод генерации числа
+```
         static string generateNumber()
         {
             string num ="";
@@ -21,5 +22,6 @@ This is my Game Wordle on C#
             
             return number;
         }
+```
 Сама менюха: <br />
 ![alt text](image.png)
