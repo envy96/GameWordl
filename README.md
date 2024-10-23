@@ -7,7 +7,7 @@ This is my Game Wordle on C#
 
 
 Метод генерации числа
-```
+```c#
         static string generateNumber()
         {
             string num ="";
