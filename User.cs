@@ -1,23 +1,23 @@
 using System.Security.Cryptography.X509Certificates;
 
 class User{
-    public string name,password;
+    public string Name,Password;
 
-    public User(string name, string password){
-        this.name = name;
-        this.password = password;
+    public User(string _name, string _password){
+        this.Name = _name;
+        this.Password = _password;
     }
 
-    public static void registration(string filePath){
+    public static void registration(string _filePath){
         
         string[] _users, _user, _userLogPass;
         string _log, _pass;
         bool _existUser = false;
         int _lineCount = 0;
-        if (File.Exists(filePath))
+        if (File.Exists(_filePath))
             {
-                _lineCount = File.ReadAllLines(filePath).Length;
-                _users = File.ReadAllLines(filePath);
+                _lineCount = File.ReadAllLines(_filePath).Length;
+                _users = File.ReadAllLines(_filePath);
                 Console.Write("Логин:");
                 _log = Console.ReadLine();
                 Console.Write("Пароль:");
@@ -34,23 +34,23 @@ class User{
                     Console.WriteLine("Пользователь с таким логином существует!");
                 }else{
                     string _text = $"{_log}|{_pass}~";
-                    File.AppendAllText(filePath, _text);
+                    File.AppendAllText(_filePath, _text);
                     Console.WriteLine("Пользователь добавллен");
                     
                 }
                 
             }
     }
-        public static void auth(string filePath, out User user){
+        public static void auth(string _filePath, out User User){
             string[] _users, _user, _userLogPass;
-            user = null;
+            User = null;
             string _log, _pass;
             bool _existUser = false;
             int _lineCount = 0;
             System.Console.WriteLine("Здравствуйте пользователь, это авторизация!!!");
-            if(File.Exists(filePath)){
-                    _lineCount = File.ReadAllLines(filePath).Length;
-                    _users = File.ReadAllLines(filePath);
+            if(File.Exists(_filePath)){
+                    _lineCount = File.ReadAllLines(_filePath).Length;
+                    _users = File.ReadAllLines(_filePath);
                     Console.Write("Логин:");
                     _log = Console.ReadLine();
                     Console.Write("Пароль:");
@@ -64,7 +64,7 @@ class User{
                     }
                     if(_existUser){
                         Console.WriteLine("Пользователь Найден, добро пожаловть");
-                        user = new User(_log, _pass);
+                        User = new User(_log, _pass);
                     }else{
                         Console.WriteLine("Пользователя с таким логином не существует");
                     }
