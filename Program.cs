@@ -4,10 +4,11 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 
 class Program
 {
-    static string LOGIN, PASSWORD;
+    static User USER;
+    static string FILEPATH = "История.txt";
     static void Main(string[] args)
     {
-        string filePath = "История.txt";
+        
         System.Console.WriteLine("1)Авторизация\n" + 
         "2)Регистрация");
         Console.Write(">");
@@ -18,10 +19,11 @@ class Program
             switch (command)
             {
                 case "1":
-                    auth(filePath);
+                    User.auth(FILEPATH, out USER);
+                    menu();
                     break;
                 case "2":
-                    registration(filePath);
+                    User.registration(FILEPATH);
                     break;
                 default:
                     Console.WriteLine("Введите корректную команду");
@@ -32,7 +34,7 @@ class Program
         }
     }
     static void menu(){
-        string filePath = "История.txt";
+        
         Console.WriteLine("Игра с угадыванием числа\n" +
             "Выберите пункт меню:\n" +
             "1)Поменять пользователя\n" +
@@ -49,19 +51,19 @@ class Program
             switch (command)
             {
                 case "1":
-                    auth(filePath);
+                    User.auth(FILEPATH, out USER);
                     break;
                 case "2":
-                    registration(filePath);
+                    User.registration(FILEPATH);
                     break;
                 case "3":
-                    GameWordle();
+                    GameWordle(FILEPATH);
                     break;
                 case "4":
-                    BestRes(filePath);
+                    BestRes(FILEPATH);
                     break;
                 case "5":
-                    LastGame(filePath);
+                    LastGame(FILEPATH);
                     break;
                 default:
                     Console.WriteLine("Введите корректную команду");
@@ -71,69 +73,9 @@ class Program
             command = Console.ReadLine();
         }
     }
-    static void registration(string filePath){
-        
-        string[] users, user, userLogPass;
-        string log, pass;
-        bool existUser = false;
-        int lineCount = 0;
-        if (File.Exists(filePath))
-            {
-                lineCount = File.ReadAllLines(filePath).Length;
-                users = File.ReadAllLines(filePath);
-                Console.Write("Логин:");
-                log = Console.ReadLine();
-                Console.Write("Пароль:");
-                pass = Console.ReadLine();
-                for(int i = 0; i < lineCount; i++){
-                    user = users[i].Split('~');
-                    userLogPass = user[0].Split('|');
-                    if(log == userLogPass[0]){
-                        existUser = true;
-                    }
-                }
-                if(existUser){
-                    Console.WriteLine("Пользователь с таким логином существует!");
-                }else{
-                    string text = $"\n{log}|{pass}~";
-                    File.AppendAllText(filePath, text);
-                    Console.WriteLine("Пользователь добавллен");
-                    auth(filePath);
-                }
-                
-            }
-    }
+    
 
-    static void auth(string filePath){
-        string[] users, user, userLogPass;
-        string log, pass;
-        bool existUser = false;
-        int lineCount = 0;
-        System.Console.WriteLine("Здравствуйте пользователь, это авторизация!!!");
-        if(File.Exists(filePath)){
-                lineCount = File.ReadAllLines(filePath).Length;
-                users = File.ReadAllLines(filePath);
-                Console.Write("Логин:");
-                log = Console.ReadLine();
-                Console.Write("Пароль:");
-                pass = Console.ReadLine();
-                for(int i = 0; i < lineCount; i++){
-                    user = users[i].Split('~');
-                    userLogPass = user[0].Split('|');
-                    if(log == userLogPass[0]){
-                        existUser = true;
-                    }
-                }
-                if(existUser){
-                    Console.WriteLine("Пользователь Найден, добро пожаловть");
-                    LOGIN = log;
-                    PASSWORD = pass;
-                    menu();
-                }else{
-                    Console.WriteLine("Пользователя с таким логином не существует");
-                }
-        }
-    }
+    
     static string findUser(string filePath){
         string[] users, user, userLogPass;
         
@@ -144,7 +86,7 @@ class Program
         for(int i = 0; i < lineCount; i++){
             user = users[i].Split('~');
             userLogPass = user[0].Split('|');
-            if(LOGIN == userLogPass[0]){
+            if(USER.name == userLogPass[0]){
                 return user[1];
             }
         }  
@@ -232,7 +174,7 @@ class Program
                     user = history[i].Split("~");
                     
                     userLogPass = user[0].Split("|");
-                    if(LOGIN == userLogPass[0] && user[1] != ""){
+                    if(USER.name == userLogPass[0] && user[1] != ""){
                         
                         string oldtext = history[i];
                         Console.WriteLine('1');
@@ -244,7 +186,7 @@ class Program
 
                         File.WriteAllLines(filePath, history);
                     }
-                    else if(LOGIN == userLogPass[0] && user[1] == ""){
+                    else if(USER.name == userLogPass[0] && user[1] == ""){
                         Console.WriteLine("2"); 
                         string oldtext = history[i];
                         int lastNumGame = 0;
@@ -265,7 +207,7 @@ class Program
             Console.WriteLine($"Ошибка при записи в файл: {ex.Message}");
         }
     }
-    static void GameWordle()
+    static void GameWordle(string filepath)
     {
         int cnt = 0;
         int a;
@@ -289,7 +231,7 @@ class Program
             if (Game(number, botNumber))
             {
                 Console.WriteLine("Поздравляю, вы угадали число!");
-                WriteToFile(cnt, "История.txt", botNumber.ToString());
+                WriteToFile(cnt, filepath, botNumber.ToString());
                 Console.WriteLine("Результат записан!");
                 break;
             }
